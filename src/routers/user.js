@@ -27,9 +27,13 @@ router.post('/users/login', async(req, res) => {
         res.status(400).send(error)
     }
 })
-router.get('/users/me', auth, async(req, res) => {
+router.get('/user/me', auth, async(req, res) => {
     // View logged in user profile
-    res.send(req.user)
+    var query = User.find({}).select('name email');
+    query.exec(function (err, user) {
+        if (err) return next(err);
+        res.send(req.user);
+    });
 })
 router.post('/users/me/logout', auth, async (req, res) => {
     // Log user out of the application
