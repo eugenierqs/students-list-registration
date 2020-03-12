@@ -27,7 +27,7 @@ router.post('/users/login', async(req, res) => {
         res.status(400).send(error)
     }
 })
-router.get('/user/me', auth, async(req, res) => {
+router.get('/users/me', auth, async(req, res) => {
     // View logged in user profile
     var query = User.find({}).select('name email');
     query.exec(function (err, user) {
